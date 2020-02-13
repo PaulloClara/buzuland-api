@@ -11,7 +11,8 @@
   },
   "dependencies": {
     "apollo-server": "^2.10.0",
-    "graphql": "^14.6.0"
+    "graphql": "^14.6.0",
+    "merge-graphql-schemas": "^1.7.6"
   },
   "devDependencies": {
     "nodemon": "^2.0.2"
