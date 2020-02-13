@@ -4,5 +4,9 @@
   "main": "src/index.js",
   "repository": "https://github.com/PaulloClara/buzuland-api",
   "author": "paulloclara <paulloclara@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "apollo-server": "^2.10.0",
+    "graphql": "^14.6.0"
+  }
 }
