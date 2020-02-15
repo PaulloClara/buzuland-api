@@ -34,11 +34,13 @@ module.exports = {
     );
   },
 
-  async lines() {
+  async lines(search) {
     if (!process.env.TOKEN || !checkValidity(process.env.TOKEN_VALIDITY))
       await this.auth();
 
-    const response = await http.get("/linhas", {
+    const route = search ? `/linhas?busca=${search}` : "/linhas";
+
+    const response = await http.get(route, {
       headers: {
         Date: getCurrentGMTDateTime(),
         "X-Auth-Token": process.env.TOKEN
