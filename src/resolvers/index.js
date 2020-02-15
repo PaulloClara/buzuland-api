@@ -1,7 +1,7 @@
-const book = require("./book");
+const line = require("./line");
 
 module.exports = {
   Query: {
-    ...book.queries
+    ...line.queries
   }
 };

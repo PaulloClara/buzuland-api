@@ -1,0 +1,11 @@
+type Line {
+  code: String!
+  name: String!
+  origin: String!
+  return: String!
+  circular: Boolean!
+}
+
+type Query {
+  lines(search: String): [Line]!
+}
