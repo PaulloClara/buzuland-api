@@ -83,24 +83,26 @@ module.exports = {
     if (response.status === 200) {
       const data = response.data.Paradas || response.data;
 
-      data.forEach(item => {
+      data.forEach(stop => {
         const address = { name: "", locale: "", others: [] };
 
-        if (item.Endereco)
-          item.Endereco.split(", ").forEach((item, index) => {
-            if (index === 0) address.name = item;
-            else if (item.includes(" - PI") || item.includes(" - MA"))
-              address.locale = item;
-            else address.others.push(item);
-          });
+        if (stop.Lat && stop.Long) {
+          if (stop.Endereco)
+            stop.Endereco.split(", ").forEach((item, index) => {
+              if (index === 0) address.name = item;
+              else if (item.includes(" - PI") || item.includes(" - MA"))
+                address.locale = item;
+              else address.others.push(item);
+            });
 
-        stops.push({
-          code: item.CodigoParada,
-          name: item.Denomicao, // MDS
-          latitude: item.Lat,
-          longitude: item.Long,
-          address
-        });
+          stops.push({
+            code: stop.CodigoParada,
+            name: stop.Denomicao, // MDS
+            latitude: stop.Lat,
+            longitude: stop.Long,
+            address
+          });
+        }
       });
     }
 
