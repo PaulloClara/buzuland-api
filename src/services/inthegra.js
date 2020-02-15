@@ -1,4 +1,5 @@
 const {
+  checkValidity,
   getCurrentGMTDateTime,
   getCurrentGMTDateTimeMore
 } = require("../utils/date");
@@ -31,5 +32,32 @@ module.exports = {
     process.env.TOKEN_VALIDITY = getCurrentGMTDateTimeMore(
       response.data.minutes
     );
+  },
+
+  async lines() {
+    if (!process.env.TOKEN || !checkValidity(process.env.TOKEN_VALIDITY))
+      await this.auth();
+
+    const response = await http.get("/linhas", {
+      headers: {
+        Date: getCurrentGMTDateTime(),
+        "X-Auth-Token": process.env.TOKEN
+      }
+    });
+
+    const lines = [];
+
+    if (response.status === 200)
+      response.data.forEach(item => {
+        lines.push({
+          code: item.CodigoLinha,
+          name: item.Denomicao, // MDS
+          origin: item.Origem,
+          return: item.Retorno,
+          circular: item.Circular
+        });
+      });
+
+    return lines;
   }
 };
