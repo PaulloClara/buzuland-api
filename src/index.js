@@ -1,6 +1,6 @@
 require("dotenv").config();
 
-const { ApolloServer, gql } = require("apollo-server");
+const { ApolloServer } = require("apollo-server");
 
 const resolvers = require("./resolvers");
 const typeDefs = require("./schemas/graphql");
@@ -10,6 +10,10 @@ const server = new ApolloServer({
   resolvers,
   context: context => ({ request: context.req, response: context.res })
 });
+
+const serverOpts = {
+  port: 4000
+};
 
 function checkEnvVars() {
   if (
@@ -26,7 +30,7 @@ function checkEnvVars() {
 }
 
 async function run() {
-  const { url } = await server.listen();
+  const { url } = await server.listen(serverOpts);
 
   console.log(`\n\tRunning on ${url}\n`);
 }
