@@ -31,9 +31,7 @@ module.exports = {
     );
 
     process.env.TOKEN = response.data.token;
-    process.env.TOKEN_VALIDITY = getCurrentGMTDateTimeMore(
-      response.data.minutes
-    );
+    process.env.TOKEN_VALIDITY = getCurrentGMTDateTimeMore(9);
   },
 
   async lines(search) {
