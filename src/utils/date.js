@@ -1,7 +1,7 @@
 const moment = require("moment");
 
 function currentGMTDateTime() {
-  return moment().add(3, "h");
+  return moment(new Date().toISOString().replace("Z", ""));
 }
 
 function format(date) {
