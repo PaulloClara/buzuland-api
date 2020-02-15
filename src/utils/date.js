@@ -1,7 +1,7 @@
 const moment = require("moment");
 
 module.exports = {
-  getCurrentDateTimeGMT() {
+  getCurrentGMTDateTime() {
     return (
       moment()
         .add(3, "h")
