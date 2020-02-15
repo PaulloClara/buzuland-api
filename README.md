@@ -33,6 +33,7 @@ $ yarn dev
 
 ### Links
 
+[API BuzuLand](http://api-buzuland.herokuapp.com) |
 [API Inthegra](https://inthegra.strans.teresina.pi.gov.br)
 
 ### Licença
