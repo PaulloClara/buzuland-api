@@ -14,6 +14,8 @@ const http = require("./axios")({
 
 module.exports = {
   async auth() {
+    if (process.env.TOKEN && checkValidity(process.env.TOKEN_VALIDITY)) return;
+
     const response = await http.post(
       "/signin",
       {
@@ -35,11 +37,9 @@ module.exports = {
   },
 
   async lines(search) {
-    if (!process.env.TOKEN || !checkValidity(process.env.TOKEN_VALIDITY))
-      await this.auth();
+    await this.auth();
 
     const route = search ? `/linhas?busca=${search}` : "/linhas";
-
     const response = await http.get(route, {
       headers: {
         Date: getCurrentGMTDateTime(),
