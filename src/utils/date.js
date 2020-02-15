@@ -1,24 +1,23 @@
 const moment = require("moment");
 
+function currentGMTDateTime() {
+  return moment().add(3, "h");
+}
+
+function format(date) {
+  return date.format("ddd, DD MMM YYYY HH:mm:ss") + " GMT";
+}
+
 module.exports = {
   getCurrentGMTDateTime() {
-    return (
-      moment()
-        .add(3, "h")
-        .format("ddd, DD MMM YYYY HH:mm:ss") + " GMT"
-    );
+    return format(currentGMTDateTime());
   },
 
   getCurrentGMTDateTimeMore(minutes) {
-    return (
-      moment()
-        .add(3, "h")
-        .add(minutes, "m")
-        .format("ddd, DD MMM YYYY HH:mm:ss") + " GMT"
-    );
+    return format(currentGMTDateTime().add(minutes, "m"));
   },
 
   checkValidity(date) {
-    return moment(this.getCurrentGMTDateTime()).isAfter(date);
+    return moment(format(currentGMTDateTime())).isAfter(date);
   }
 };
