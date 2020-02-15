@@ -1,0 +1,17 @@
+type Address {
+  name: String!
+  locale: String!
+  others: [String!]!
+}
+
+type Stop {
+  code: String!
+  name: String!
+  address: Address!
+  latitude: String!
+  longitude: String!
+}
+
+type Query {
+  stops(search: String): [Stop]!
+}
