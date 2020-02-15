@@ -5,7 +5,11 @@ const { ApolloServer, gql } = require("apollo-server");
 const resolvers = require("./resolvers");
 const typeDefs = require("./schemas/graphql");
 
-const server = new ApolloServer({ typeDefs, resolvers });
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  context: context => ({ request: context.req, response: context.res })
+});
 
 function checkEnvVars() {
   if (
