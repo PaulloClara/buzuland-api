@@ -25,6 +25,10 @@ $ yarn -i
 $ yarn dev
 ```
 
+### Insomnia
+
+`Preferences > Data > Import Data > From File > insomnia.json`
+
 ---
 
 ### Links
