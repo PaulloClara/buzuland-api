@@ -1,4 +1,7 @@
-const { getCurrentDateTimeGMT } = require("../utils/date");
+const {
+  getCurrentGMTDateTime,
+  getCurrentGMTDateTimeMore
+} = require("../utils/date");
 
 const http = require("./axios")({
   baseURL: process.env.INTHEGRA_URL,
@@ -18,12 +21,15 @@ module.exports = {
       },
       {
         headers: {
-          Date: getCurrentDateTimeGMT(),
+          Date: getCurrentGMTDateTime(),
           "Content-Type": "application/json"
         }
       }
     );
 
-    return response.data.token;
+    process.env.TOKEN = response.data.token;
+    process.env.TOKEN_VALIDITY = getCurrentGMTDateTimeMore(
+      response.data.minutes
+    );
   }
 };
