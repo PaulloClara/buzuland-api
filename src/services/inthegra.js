@@ -61,5 +61,32 @@ module.exports = {
       });
 
     return lines;
+  },
+
+  async stops() {
+    await this.auth();
+
+    const route = "/paradas";
+    const response = await http.get(route, {
+      headers: {
+        Date: getCurrentGMTDateTime(),
+        "X-Auth-Token": process.env.TOKEN
+      }
+    });
+
+    const stops = [];
+
+    if (response.status === 200)
+      response.data.forEach(item => {
+        stops.push({
+          code: item.CodigoParada,
+          name: item.Denomicao, // MDS
+          address: item.Endereco,
+          latitude: item.Lat,
+          longitude: item.Long
+        });
+      });
+
+    return stops;
   }
 };
