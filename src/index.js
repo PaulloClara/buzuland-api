@@ -13,7 +13,7 @@ const server = new ApolloServer({
 });
 
 const serverOpts = {
-  port: 4000
+  port: process.env.PORT || 4000
 };
 
 function checkEnvVars() {
