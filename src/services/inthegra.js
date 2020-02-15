@@ -84,12 +84,22 @@ module.exports = {
       const data = response.data.Paradas || response.data;
 
       data.forEach(item => {
+        const address = { name: "", locale: "", others: [] };
+
+        if (item.Endereco)
+          item.Endereco.split(", ").forEach((item, index) => {
+            if (index === 0) address.name = item;
+            else if (item.includes(" - PI") || item.includes(" - MA"))
+              address.locale = item;
+            else address.others.push(item);
+          });
+
         stops.push({
           code: item.CodigoParada,
           name: item.Denomicao, // MDS
-          address: item.Endereco,
           latitude: item.Lat,
-          longitude: item.Long
+          longitude: item.Long,
+          address
         });
       });
     }
