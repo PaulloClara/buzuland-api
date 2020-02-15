@@ -8,6 +8,8 @@ const typeDefs = require("./schemas/graphql");
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  playground: true,
+  introspection: true,
   cors: { origin: "*" },
   context: context => ({ request: context.req, response: context.res })
 });
