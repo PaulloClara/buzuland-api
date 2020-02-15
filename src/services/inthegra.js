@@ -63,10 +63,14 @@ module.exports = {
     return lines;
   },
 
-  async stops() {
+  async stops(search) {
     await this.auth();
 
-    const route = "/paradas";
+    const route = !search
+      ? "/paradas"
+      : isNaN(Number(search))
+      ? `/paradas?busca=${search}`
+      : `/paradasLinha?busca=${search}`;
     const response = await http.get(route, {
       headers: {
         Date: getCurrentGMTDateTime(),
@@ -76,8 +80,10 @@ module.exports = {
 
     const stops = [];
 
-    if (response.status === 200)
-      response.data.forEach(item => {
+    if (response.status === 200) {
+      const data = response.data.Paradas || response.data;
+
+      data.forEach(item => {
         stops.push({
           code: item.CodigoParada,
           name: item.Denomicao, // MDS
@@ -86,6 +92,7 @@ module.exports = {
           longitude: item.Long
         });
       });
+    }
 
     return stops;
   }
