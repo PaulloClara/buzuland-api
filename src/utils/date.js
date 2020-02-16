@@ -18,6 +18,6 @@ module.exports = {
   },
 
   checkValidity(date) {
-    return moment(format(currentGMTDateTime())).isAfter(date);
+    return moment(format(currentGMTDateTime())).isBefore(date);
   }
 };
