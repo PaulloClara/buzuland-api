@@ -25,6 +25,52 @@ $ yarn -i
 $ yarn dev
 ```
 
+### Playground
+
+```graphql
+query {
+  lines {
+    code
+    name
+  }
+}
+```
+
+```graphql
+query {
+  lines(search: "0204") {
+    code
+    name
+    origin
+    return
+    circular
+  }
+}
+```
+
+```graphql
+query {
+  stops {
+    code
+    name
+  }
+}
+```
+
+```graphql
+query {
+  busLines {
+    code
+    name
+    buses {
+      code
+      latitude
+      longitude
+    }
+  }
+}
+```
+
 ### Insomnia
 
 `Preferences > Data > Import Data > From File > insomnia.json`
