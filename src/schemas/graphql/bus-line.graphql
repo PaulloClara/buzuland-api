@@ -1,0 +1,19 @@
+type Bus {
+  code: String!
+  latitude: String!
+  longitude: String!
+  time: String!
+}
+
+type BusLine {
+  code: String!
+  name: String!
+  origin: String!
+  return: String!
+  circular: Boolean!
+  buses: [Bus!]!
+}
+
+type Query {
+  busLines(search: String): [BusLine!]!
+}
