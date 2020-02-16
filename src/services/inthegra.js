@@ -107,7 +107,7 @@ module.exports = {
     return stops;
   },
 
-  async busLines() {
+  async busLines(search) {
     await this.auth();
 
     const route = "/veiculos";
@@ -122,25 +122,28 @@ module.exports = {
 
     if (response.status === 200)
       response.data.forEach(line => {
-        const buses = [];
+        // problems in "/veiculosLinha?busca=<line>"
+        if (!search || line.Linha.CodigoLinha == search) {
+          const buses = [];
 
-        line.Linha.Veiculos.forEach(bus => {
-          buses.push({
-            code: bus.CodigoVeiculo,
-            latitude: bus.Lat,
-            longitude: bus.Long,
-            time: bus.Hora
+          line.Linha.Veiculos.forEach(bus => {
+            buses.push({
+              code: bus.CodigoVeiculo,
+              latitude: bus.Lat,
+              longitude: bus.Long,
+              time: bus.Hora
+            });
           });
-        });
 
-        busLines.push({
-          code: line.Linha.CodigoLinha,
-          name: line.Linha.Denomicao,
-          origin: line.Linha.Origem,
-          return: line.Linha.Retorno,
-          circular: line.Linha.Circular,
-          buses
-        });
+          busLines.push({
+            code: line.Linha.CodigoLinha,
+            name: line.Linha.Denomicao,
+            origin: line.Linha.Origem,
+            return: line.Linha.Retorno,
+            circular: line.Linha.Circular,
+            buses
+          });
+        }
       });
 
     return busLines;
