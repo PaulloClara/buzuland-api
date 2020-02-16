@@ -51,7 +51,7 @@ module.exports = {
       response.data.forEach(item => {
         lines.push({
           code: item.CodigoLinha,
-          name: item.Denomicao, // MDS
+          name: item.Denomicao,
           origin: item.Origem,
           return: item.Retorno,
           circular: item.Circular
@@ -95,7 +95,7 @@ module.exports = {
 
           stops.push({
             code: stop.CodigoParada,
-            name: stop.Denomicao, // MDS
+            name: stop.Denomicao,
             latitude: stop.Lat,
             longitude: stop.Long,
             address
@@ -105,5 +105,44 @@ module.exports = {
     }
 
     return stops;
+  },
+
+  async busLines() {
+    await this.auth();
+
+    const route = "/veiculos";
+    const response = await http.get(route, {
+      headers: {
+        Date: getCurrentGMTDateTime(),
+        "X-Auth-Token": process.env.TOKEN
+      }
+    });
+
+    const busLines = [];
+
+    if (response.status === 200)
+      response.data.forEach(line => {
+        const buses = [];
+
+        line.Linha.Veiculos.forEach(bus => {
+          buses.push({
+            code: bus.CodigoVeiculo,
+            latitude: bus.Lat,
+            longitude: bus.Long,
+            time: bus.Hora
+          });
+        });
+
+        busLines.push({
+          code: line.Linha.CodigoLinha,
+          name: line.Linha.Denomicao,
+          origin: line.Linha.Origem,
+          return: line.Linha.Retorno,
+          circular: line.Linha.Circular,
+          buses
+        });
+      });
+
+    return busLines;
   }
 };
