@@ -9,6 +9,8 @@ module.exports = {
 
         return stops;
       } catch (error) {
+        console.error(error);
+
         return newError({ msg: "Error", code: 400, response });
       }
     }
