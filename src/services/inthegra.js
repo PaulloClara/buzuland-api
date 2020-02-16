@@ -48,13 +48,13 @@ module.exports = {
     const lines = [];
 
     if (response.status === 200)
-      response.data.forEach(item => {
+      response.data.forEach(line => {
         lines.push({
-          code: item.CodigoLinha,
-          name: item.Denomicao,
-          origin: item.Origem,
-          return: item.Retorno,
-          circular: item.Circular
+          code: line.CodigoLinha,
+          name: line.Denomicao,
+          origin: line.Origem,
+          return: line.Retorno,
+          circular: line.Circular
         });
       });
 
@@ -121,12 +121,12 @@ module.exports = {
     const busLines = [];
 
     if (response.status === 200)
-      response.data.forEach(line => {
+      response.data.forEach(({ Linha: line }) => {
         // problems in "/veiculosLinha?busca=<line>"
-        if (!search || line.Linha.CodigoLinha == search) {
+        if (!search || line.CodigoLinha == search) {
           const buses = [];
 
-          line.Linha.Veiculos.forEach(bus => {
+          line.Veiculos.forEach(bus => {
             buses.push({
               code: bus.CodigoVeiculo,
               latitude: bus.Lat,
@@ -136,11 +136,11 @@ module.exports = {
           });
 
           busLines.push({
-            code: line.Linha.CodigoLinha,
-            name: line.Linha.Denomicao,
-            origin: line.Linha.Origem,
-            return: line.Linha.Retorno,
-            circular: line.Linha.Circular,
+            code: line.CodigoLinha,
+            name: line.Denomicao,
+            origin: line.Origem,
+            return: line.Retorno,
+            circular: line.Circular,
             buses
           });
         }
