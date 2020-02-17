@@ -11,6 +11,13 @@ module.exports = {
       } catch (error) {
         console.error(error);
 
+        if (error.code === "ECONNABORTED")
+          return newError({
+            msg: "Inthegra API (inthegra.strans.teresina.pi.gov.br) crashed",
+            code: 400,
+            response
+          });
+
         return newError({ msg: "Error", code: 400, response });
       }
     }
