@@ -21,7 +21,7 @@ Clone o repositório, instale as dependências e inicie o servidor.
 $ git clone https://github.com/paulloclara/buzuland-api
 $ cd buzuland-api
 $ yarn -i
-# configure the .env file
+# configure o arquivo .env
 $ yarn dev
 ```
 
@@ -29,7 +29,7 @@ $ yarn dev
 
 ```graphql
 query {
-  lines {
+  busLine {
     code
     name
   }
@@ -38,7 +38,7 @@ query {
 
 ```graphql
 query {
-  lines(search: "0204") {
+  busLine(search: ["0201", "0202", "0204"]) {
     code
     name
     origin
@@ -50,16 +50,18 @@ query {
 
 ```graphql
 query {
-  stops {
+  busStop(search: ["SANTA MARIA", "0202"]) {
     code
     name
+    latitude
+    longitude
   }
 }
 ```
 
 ```graphql
 query {
-  busLines {
+  busLocation {
     code
     name
     buses {
@@ -77,11 +79,11 @@ query {
 
 ---
 
-### Links
+#### Links
 
 [API BuzuLand](https://api-buzuland.herokuapp.com) |
 [API Inthegra](https://inthegra.strans.teresina.pi.gov.br)
 
-### Licença
+#### Licença
 
 MIT
