@@ -1,6 +1,6 @@
 # BuzuLand-API
 
-BuzuLand é uma API desenvolvida para abstrair a API Inthegra, ao mesmo tempo em que fornece novas tecnologias e recursos.
+BuzuLand-API tem como objetivo abstrair a API Inthegra e fornecer mais recursos através de novas tecnologias.
 
 ### Tech
 
