@@ -15,5 +15,5 @@ type BusLine {
 }
 
 type Query {
-  busLines(search: String): [BusLine!]!
+  busLines(search: [String!]): [BusLine!]!
 }

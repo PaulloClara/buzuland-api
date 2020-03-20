@@ -13,5 +13,5 @@ type Stop {
 }
 
 type Query {
-  stops(search: String): [Stop]!
+  stops(search: [String!]): [Stop!]!
 }

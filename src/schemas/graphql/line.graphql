@@ -7,5 +7,5 @@ type Line {
 }
 
 type Query {
-  lines(search: String): [Line]!
+  lines(search: [String!]): [Line!]!
 }

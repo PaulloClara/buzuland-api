@@ -1,11 +1,13 @@
-const inthegra = require("../services/inthegra");
+const Inthegra = require("../services/inthegra");
 const { newError } = require("../utils/apollo-error");
 
 module.exports = {
   queries: {
-    async lines(_, { search }, { response }) {
+    async lines(_, { search = [""] }, { response }) {
       try {
-        const lines = await inthegra.lines(search);
+        const lines = (
+          await Promise.all(search.map(lineCode => Inthegra.lines(lineCode)))
+        ).reduce((result, line) => result.concat(line));
 
         return lines;
       } catch (error) {
