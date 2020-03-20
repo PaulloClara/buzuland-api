@@ -3,13 +3,13 @@ const { newError } = require("../utils/apollo-error");
 
 module.exports = {
   queries: {
-    async lines(_, { search = [""] }, { response }) {
+    async busStop(_, { search = [""] }, { response }) {
       try {
-        const lines = (
-          await Promise.all(search.map(lineCode => Inthegra.lines(lineCode)))
-        ).reduce((result, line) => result.concat(line));
+        const stops = (await Promise.all(
+          search.map(arg => Inthegra.stop(arg))
+        )).reduce((result, stop) => result.concat(stop));
 
-        return lines;
+        return stops;
       } catch (error) {
         console.error(error);
 

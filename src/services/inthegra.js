@@ -34,7 +34,7 @@ module.exports = {
     process.env.TOKEN_VALIDITY = getCurrentGMTDateTimeMore(9);
   },
 
-  async lines(search) {
+  async line(search) {
     await this.auth();
 
     const route = search ? `/linhas?busca=${search}` : "/linhas";
@@ -61,7 +61,7 @@ module.exports = {
     return lines;
   },
 
-  async stops(search) {
+  async stop(search) {
     await this.auth();
 
     const route = !search
@@ -107,7 +107,7 @@ module.exports = {
     return stops;
   },
 
-  async busLines(search) {
+  async location(search) {
     await this.auth();
 
     const route = "/veiculos";
@@ -118,15 +118,15 @@ module.exports = {
       }
     });
 
-    const busLines = [];
+    const locations = [];
 
     if (response.status === 200)
-      response.data.forEach(({ Linha: line }) => {
-        // problems in "/veiculosLinha?busca=<line>"
-        if (!search || line.CodigoLinha == search) {
+      response.data.forEach(({ Linha: location }) => {
+        // problems in "/veiculosLinha?busca=<lineCode>"
+        if (!search || location.CodigoLinha == search) {
           const buses = [];
 
-          line.Veiculos.forEach(bus => {
+          location.Veiculos.forEach(bus => {
             buses.push({
               code: bus.CodigoVeiculo,
               latitude: bus.Lat,
@@ -135,17 +135,17 @@ module.exports = {
             });
           });
 
-          busLines.push({
-            code: line.CodigoLinha,
-            name: line.Denomicao,
-            origin: line.Origem,
-            return: line.Retorno,
-            circular: line.Circular,
+          locations.push({
+            code: location.CodigoLinha,
+            name: location.Denomicao,
+            origin: location.Origem,
+            return: location.Retorno,
+            circular: location.Circular,
             buses
           });
         }
       });
 
-    return busLines;
+    return locations;
   }
 };

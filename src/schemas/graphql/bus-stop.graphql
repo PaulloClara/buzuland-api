@@ -4,7 +4,7 @@ type Address {
   others: [String!]!
 }
 
-type Stop {
+type BusStop {
   code: String!
   name: String!
   address: Address!
@@ -13,5 +13,5 @@ type Stop {
 }
 
 type Query {
-  stops(search: [String!]): [Stop!]!
+  busStop(search: [String!]): [BusStop!]!
 }

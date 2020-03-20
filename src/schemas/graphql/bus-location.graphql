@@ -1,0 +1,19 @@
+type Location {
+  code: String!
+  latitude: String!
+  longitude: String!
+  time: String!
+}
+
+type BusLocation {
+  code: String!
+  name: String!
+  origin: String!
+  return: String!
+  circular: Boolean!
+  buses: [Location!]!
+}
+
+type Query {
+  busLocation(search: [String!]): [BusLocation!]!
+}
