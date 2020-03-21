@@ -1,5 +1,4 @@
 const Inthegra = require("../services/inthegra");
-const ApolloError = require("../utils/apollo-error");
 
 module.exports = {
   queries: {
@@ -14,9 +13,9 @@ module.exports = {
         console.error(error);
 
         if (error.code === "ECONNABORTED")
-          return ApolloError.inthegraError({ response });
+          return response.apolloError.inthegraError();
 
-        return ApolloError.internalError({ response });
+        return response.apolloError.internalError();
       }
     }
   }

@@ -8,25 +8,23 @@ const codes = {
 };
 
 module.exports = {
-  newError({ message, code, response }) {
-    response.status(code);
+  newError({ message, code }) {
+    this.response.status(code);
 
     return new ApolloError(message, codes[code] || "INTERNAL_SERVER_ERROR");
   },
 
-  inthegraError({ response }) {
+  inthegraError() {
     return this.newError({
       message: "Inthegra API (inthegra.strans.teresina.pi.gov.br) crashed",
-      code: 400,
-      response
+      code: 400
     });
   },
 
-  internalError({ response }) {
+  internalError() {
     return this.newError({
       message: "Error",
-      code: 500,
-      response
+      code: 500
     });
   }
 };

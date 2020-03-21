@@ -1,13 +1,16 @@
 require("dotenv").config();
 
-const { ApolloServer } = require("apollo-server");
+const { ApolloServer, makeExecutableSchema } = require("apollo-server");
 
 const resolvers = require("./resolvers");
 const typeDefs = require("./schemas/graphql");
 
+const schema = require("./middleware").config(
+  makeExecutableSchema({ typeDefs, resolvers })
+);
+
 const server = new ApolloServer({
-  typeDefs,
-  resolvers,
+  schema,
   playground: true,
   introspection: true,
   cors: { origin: "*" },
