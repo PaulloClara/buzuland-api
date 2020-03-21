@@ -1,5 +1,5 @@
 const Inthegra = require("../services/inthegra");
-const { newError } = require("../utils/apollo-error");
+const ApolloError = require("../utils/apollo-error");
 
 module.exports = {
   queries: {
@@ -14,13 +14,9 @@ module.exports = {
         console.error(error);
 
         if (error.code === "ECONNABORTED")
-          return newError({
-            msg: "Inthegra API (inthegra.strans.teresina.pi.gov.br) crashed",
-            code: 400,
-            response
-          });
+          return ApolloError.inthegraError({ response });
 
-        return newError({ msg: "Error", code: 400, response });
+        return ApolloError.internalError({ response });
       }
     }
   }
