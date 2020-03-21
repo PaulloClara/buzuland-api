@@ -6,12 +6,12 @@ BuzuLand-API tem como objetivo abstrair a API Inthegra e fornecer mais recursos 
 
 Como ninguém reinventa a roda, essa API usa várias tecnologias para funcionar corretamente, eis algumas delas:
 
-- ApolloServer - Framework leve voltado ao Graphql.
-- Graphql - Implementação de referência JavaScript para GraphQL.
-- Axios - Cliente HTTP baseado em promise para Node.
-- Moment - Manipulador de data e hora.
-- Dotenv - Gerenciador de variáveis de ambiente.
-- Node - Ferramenta de magia negra.
+- [ApolloServer] - Framework leve voltado ao Graphql.
+- [Graphql] - Implementação de referência JavaScript para GraphQL.
+- [Axios] - Cliente HTTP baseado em promise para Node.
+- [Moment] - Manipulador de data e hora.
+- [Dotenv] - Gerenciador de variáveis de ambiente.
+- [Node] - Ferramenta de magia negra.
 
 ### Instalação
 
@@ -87,3 +87,12 @@ query {
 #### Licença
 
 MIT
+
+<!-- Refs -->
+
+[apolloserver]: https://apollographql.com
+[graphql]: https://graphql.org
+[axios]: https://github.com/axios/axios
+[moment]: https://momentjs.com
+[dotenv]: https://github.com/motdotla/dotenv
+[node]: https://nodejs.org/en
